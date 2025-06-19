@@ -30,18 +30,24 @@ public class Add_Specimen extends BaseScreen {
 	       
 	       
 	       public static void main(String[] args) throws MalformedURLException, InterruptedException {
+	    	   
+	    	   for (int i = 1; i <= 50; i++) {
+	               System.out.println("Running test iteration: " + i);
 	    	   driver = CapabalitiesSet.setup();
 
 	    	// CapabalitiesSet.setup();
 	    	   Thread.sleep(3000);
 				driver.findElement(By.xpath("//android.widget.TextView[@text=\"Specimen\"]")).click();
 		        Thread.sleep(4000);
-			WebElement popup = driver.findElement(By.id("com.android.packageinstaller:id/permission_allow_button"));
-		        if(popup.isDisplayed()) {
-		        		popup.click();
-		        		 
-		        	
-		        }
+		        try {
+	                WebElement popup = driver.findElement(By.id("com.android.packageinstaller:id/permission_allow_button"));
+	                if (popup.isDisplayed()) {
+	                    popup.click();
+	                }
+	            } catch (Exception e) {
+	                System.out.println("Permission popup not shown.");
+	            }
+
 
 				//driver.findElement(By.xpath("com.android.packageinstaller:id/permission_allow_button")).click();
 		        Thread.sleep(2000);
@@ -72,6 +78,7 @@ public class Add_Specimen extends BaseScreen {
 		}
 	       
 	    }
+}
 	 
 	 
 	 

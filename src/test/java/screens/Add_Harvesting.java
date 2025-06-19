@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import base.BaseScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
-import utilities.CapabalitiesSet;
+import utilities.CapabalitiesSet; 
 import utilities.Scrolls;
 
 public class Add_Harvesting extends BaseScreen{
@@ -21,15 +21,22 @@ public class Add_Harvesting extends BaseScreen{
 	}
 	
 	public static void main(String[] args) throws MalformedURLException, InterruptedException {
+		
+		for (int i = 1; i <= 50; i++) {
+            System.out.println("Running test iteration: " + i);
 		driver = CapabalitiesSet.setup();
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("//android.widget.TextView[@text=\"Harvesting\"]")).click();
 		Thread.sleep(2000);
 
-		WebElement popup = driver.findElement(By.id("com.android.packageinstaller:id/permission_allow_button"));
-        if(popup.isDisplayed()) {
-        		popup.click();
-        		 }
+		 try {
+             WebElement popup = driver.findElement(By.id("com.android.packageinstaller:id/permission_allow_button"));
+             if (popup.isDisplayed()) {
+                 popup.click();
+             }
+         } catch (Exception e) {
+             System.out.println("Permission popup not shown.");
+         }
         
         Thread.sleep(1000);
         driver.findElement(By.xpath("//android.widget.TextView[@text=\"󰐕\"]")).click();
@@ -50,12 +57,12 @@ public class Add_Harvesting extends BaseScreen{
         driver.findElement(By.xpath("//android.widget.EditText[@resource-id=\"excess-weight-b-2-1\"]")).sendKeys("30");//excess weight B
         Thread.sleep(3000);
 
-       // Scrolls.swipeUp(2, (AndroidDriver) driver);
-        ((JavascriptExecutor) driver).executeScript("mobile: swipeGesture", Map.of(
-        	    "left", 100, "top", 100, "width", 500, "height", 1000,
-        	    "direction", "up",
-        	    "percent", 0.75
-        	));
+       Scrolls.swipeUp(2, (AndroidDriver) driver);
+//        ((JavascriptExecutor) driver).executeScript("mobile: swipeGesture", Map.of(
+//        	    "left", 100, "top", 100, "width", 500, "height", 1000,
+//        	    "direction", "up",
+//        	    "percent", 0.75
+//        	));
 
         Thread.sleep(2000);
 
@@ -67,6 +74,8 @@ public class Add_Harvesting extends BaseScreen{
         driver.findElement(By.xpath("//android.widget.EditText[@resource-id=\"loose-weight-c-3-2\"]")).sendKeys("15");//loose weight
         driver.findElement(By.xpath("//android.widget.EditText[@resource-id=\"total-bags-c-3-3\"]")).sendKeys("20");//total bags
         
+        Scrolls.swipeUp(2, (AndroidDriver) driver);
+
         driver.findElement(By.xpath("//android.widget.EditText[@resource-id=\"total-weight-d-4-0\"]")).sendKeys("1");//total weight c
         driver.findElement(By.xpath("//android.widget.EditText[@resource-id=\"excess-weight-d-4-1\"]")).sendKeys("10");//excess weight c
         driver.findElement(By.xpath("//android.widget.EditText[@resource-id=\"loose-weight-d-4-2\"]")).sendKeys("15");//loose weight
@@ -84,7 +93,7 @@ public class Add_Harvesting extends BaseScreen{
 
 		
 		
-		
+		}
 	}
 
 }
